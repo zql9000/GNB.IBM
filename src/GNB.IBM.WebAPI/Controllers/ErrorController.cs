@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
+using Serilog;
 
 namespace GNB.IBM.WebAPI.Controllers
 {
@@ -16,6 +17,8 @@ namespace GNB.IBM.WebAPI.Controllers
             {
                 return NotFound();
             }
+
+            Log.Error(context.Error, $"URI: {context.Path} - Message: {context.Error.Message}");
 
             return Problem(
                 instance: context.Path,

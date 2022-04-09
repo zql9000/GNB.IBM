@@ -272,3 +272,6 @@ __pycache__/
 
 # Tests results y coverage
 test/**/TestResults/
+
+# Serilog logs files
+serilog*.txt
