@@ -9,6 +9,7 @@ namespace GNB.IBM.Application.Mapper
         public ApplicationProfile()
         {
             CreateMap<ConversionRate, ConversionRateModel>().ReverseMap();
+            CreateMap<ProductTransaction, ProductTransactionModel>().ReverseMap();
         }
     }
 }
