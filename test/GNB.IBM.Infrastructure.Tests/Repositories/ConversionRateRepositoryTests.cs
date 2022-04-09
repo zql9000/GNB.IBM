@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Xunit;
 
-namespace GNB.IBM.Infrastructure.Tests
+namespace GNB.IBM.Infrastructure.Tests.Repositories
 {
     public class ConversionRateRepositoryTests
     {
@@ -22,7 +22,7 @@ namespace GNB.IBM.Infrastructure.Tests
 
             var fakeIOptionsSnapshot = new Mock<IOptionsSnapshot<ExternalServicesSettings>>();
             var stubExternalServicesSettings = new ExternalServicesSettings();
-            var conversionRatesURI = "http://invalid-url.com";
+            var conversionRatesURI = "http://fake-url.com";
             stubExternalServicesSettings.ConversionRatesURI = conversionRatesURI;
             fakeIOptionsSnapshot.Setup(x => x.Value).Returns(stubExternalServicesSettings);
 
@@ -48,7 +48,7 @@ namespace GNB.IBM.Infrastructure.Tests
 
             var fakeIOptionsSnapshot = new Mock<IOptionsSnapshot<ExternalServicesSettings>>();
             var stubExternalServicesSettings = new ExternalServicesSettings();
-            var conversionRatesURI = "http://invalid-url.com";
+            var conversionRatesURI = "http://fake-url.com";
             stubExternalServicesSettings.ConversionRatesURI = conversionRatesURI;
             fakeIOptionsSnapshot.Setup(x => x.Value).Returns(stubExternalServicesSettings);
 
