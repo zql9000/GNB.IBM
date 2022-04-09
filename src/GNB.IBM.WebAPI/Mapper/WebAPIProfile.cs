@@ -9,6 +9,7 @@ namespace GNB.IBM.WebAPI.Mapper
         public WebAPIProfile()
         {
             CreateMap<ConversionRateModel, ConversionRateDto>().ReverseMap();
+            CreateMap<ProductTransactionModel, ProductTransactionDto>().ReverseMap();
         }
     }
 }

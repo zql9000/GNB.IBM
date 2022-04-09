@@ -9,7 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Xunit;
 
-namespace GNB.IBM.WebAPI.Tests
+namespace GNB.IBM.WebAPI.Tests.Controllers
 {
     public class ConversionRatesControllerTests
     {

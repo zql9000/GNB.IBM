@@ -1,10 +1,12 @@
 using GNB.IBM.Application.Interfaces;
 using GNB.IBM.Application.Services;
 using GNB.IBM.Core.Configuration;
+using GNB.IBM.Core.Interfaces;
 using GNB.IBM.Core.Repositories;
 using GNB.IBM.Core.Repositories.Base;
 using GNB.IBM.Infrastructure.Repositories;
 using GNB.IBM.Infrastructure.Repositories.Base;
+using GNB.IBM.Infrastructure.Services;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -47,12 +49,14 @@ static void ConfigureCustomServices(IServiceCollection services, IConfiguration 
 
     // Add Infrastructure Layer
     services.AddHttpClient();
-    services.AddSingleton(typeof(GNB.IBM.Core.Interfaces.IHttpHandler<>), typeof(GNB.IBM.Infrastructure.Services.HttpHandler<>));
+    services.AddSingleton(typeof(IHttpHandler<>), typeof(HttpHandler<>));
     services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
     services.AddScoped<IConversionRateRepository, ConversionRateRepository>();
+    services.AddScoped<IProductTransactionRepository, ProductTransactionRepository>();
 
     // Add Application Layer
     services.AddScoped<IConversionRateService, ConversionRateService>();
+    services.AddScoped<IProductTransactionService, ProductTransactionService>();
 
     // Add WebAPI Layer
     Log.Logger = new LoggerConfiguration()
