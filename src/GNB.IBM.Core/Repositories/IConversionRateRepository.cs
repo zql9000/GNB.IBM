@@ -5,6 +5,6 @@ namespace GNB.IBM.Core.Repositories
 {
     public interface IConversionRateRepository : IRepository<ConversionRate>
     {
-        Task<IReadOnlyList<ConversionRate>> GetAllAsync();
+        Task<IEnumerable<ConversionRate>> GetConversionRateListAsync();
     }
 }

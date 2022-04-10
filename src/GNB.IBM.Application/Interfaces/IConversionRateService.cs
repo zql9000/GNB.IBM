@@ -4,6 +4,6 @@ namespace GNB.IBM.Application.Interfaces
 {
     public interface IConversionRateService
     {
-        Task<IEnumerable<ConversionRateModel>> GetConversionRateList();
+        Task<IEnumerable<ConversionRateModel>> GetConversionRateListAsync();
     }
 }

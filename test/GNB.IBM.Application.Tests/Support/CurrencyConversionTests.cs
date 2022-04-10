@@ -1,6 +1,6 @@
 ﻿using GNB.IBM.Application.Exceptions;
-using GNB.IBM.Application.Models;
 using GNB.IBM.Application.Support;
+using GNB.IBM.Core.Entities;
 using System.Collections.Generic;
 using Xunit;
 
@@ -15,7 +15,7 @@ namespace GNB.IBM.Application.Tests.Support
             var from = "A";
             var to = "A";
             var amount = 1.1f;
-            IEnumerable<ConversionRateModel> stubConvertionRateModels = new List<ConversionRateModel>();
+            IEnumerable<ConversionRate> stubConvertionRateModels = new List<ConversionRate>();
             var currencyConversion = new CurrencyConversion(stubConvertionRateModels);
             var expected = amount;
 
@@ -34,9 +34,9 @@ namespace GNB.IBM.Application.Tests.Support
             var to = "B";
             var amount = 1.1f;
             var rate = 1.1f;
-            IEnumerable<ConversionRateModel> stubConvertionRateModels = new List<ConversionRateModel>
+            IEnumerable<ConversionRate> stubConvertionRateModels = new List<ConversionRate>
             {
-                new ConversionRateModel { From = from, To = to, Rate = rate },
+                new ConversionRate { From = from, To = to, Rate = rate },
             };
             var currencyConversion = new CurrencyConversion(stubConvertionRateModels);
             float expected = amount * rate;
@@ -55,12 +55,12 @@ namespace GNB.IBM.Application.Tests.Support
             var from = "A";
             var to = "C";
             var amount = 1.1f;
-            IEnumerable<ConversionRateModel> stubConvertionRateModels = new List<ConversionRateModel>
+            IEnumerable<ConversionRate> stubConvertionRateModels = new List<ConversionRate>
             {
-                new ConversionRateModel { From = "A", To = "B", Rate = 1.359f },
-                new ConversionRateModel { From = "B", To = "A", Rate = 0.736f },
-                new ConversionRateModel { From = "B", To = "C", Rate = 1.366f },
-                new ConversionRateModel { From = "C", To = "B", Rate = 0.732f }
+                new ConversionRate { From = "A", To = "B", Rate = 1.359f },
+                new ConversionRate { From = "B", To = "A", Rate = 0.736f },
+                new ConversionRate { From = "B", To = "C", Rate = 1.366f },
+                new ConversionRate { From = "C", To = "B", Rate = 0.732f }
             };
             var currencyConversion = new CurrencyConversion(stubConvertionRateModels);
             float expected = 2.04f;
@@ -79,7 +79,7 @@ namespace GNB.IBM.Application.Tests.Support
             var from = "A";
             var to = "B";
             var amount = 1.1f;
-            IEnumerable<ConversionRateModel> stubConvertionRateModels = new List<ConversionRateModel>();
+            IEnumerable<ConversionRate> stubConvertionRateModels = new List<ConversionRate>();
             var currencyConversion = new CurrencyConversion(stubConvertionRateModels);
 
             // Act

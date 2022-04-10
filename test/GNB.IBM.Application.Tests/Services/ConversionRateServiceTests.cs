@@ -19,7 +19,7 @@ namespace GNB.IBM.Application.Tests.Services
             // Arrange
             var fakeIConversionRateRepository = new Mock<IConversionRateRepository>();
             var stubConversionRates = new List<ConversionRate>();
-            fakeIConversionRateRepository.Setup(x => x.GetAllAsync()).ReturnsAsync(stubConversionRates);
+            fakeIConversionRateRepository.Setup(x => x.GetConversionRateListAsync()).ReturnsAsync(stubConversionRates);
 
             var mapperConfiguration = new MapperConfiguration(cfg =>
             {
@@ -30,10 +30,10 @@ namespace GNB.IBM.Application.Tests.Services
             var conversionRateService = new ConversionRateService(fakeIConversionRateRepository.Object, mapper);
 
             // Act
-            IEnumerable<ConversionRateModel> list = await conversionRateService.GetConversionRateList();
+            IEnumerable<ConversionRateModel> list = await conversionRateService.GetConversionRateListAsync();
 
             // Assert
-            fakeIConversionRateRepository.Verify(x => x.GetAllAsync(), Times.Once);
+            fakeIConversionRateRepository.Verify(x => x.GetConversionRateListAsync(), Times.Once);
         }
 
         [Theory]
@@ -43,8 +43,8 @@ namespace GNB.IBM.Application.Tests.Services
         {
             // Arrange
             var fakeIConversionRateRepository = new Mock<IConversionRateRepository>();
-            var initialConvertionRatesCount = conversionRates.Count();
-            fakeIConversionRateRepository.Setup(x => x.GetAllAsync()).ReturnsAsync(conversionRates);
+            var expected = conversionRates.Count();
+            fakeIConversionRateRepository.Setup(x => x.GetConversionRateListAsync()).ReturnsAsync(conversionRates);
 
             var mapperConfiguration = new MapperConfiguration(cfg =>
             {
@@ -55,10 +55,10 @@ namespace GNB.IBM.Application.Tests.Services
             var conversionRateService = new ConversionRateService(fakeIConversionRateRepository.Object, mapper);
 
             // Act
-            IEnumerable<ConversionRateModel> list = await conversionRateService.GetConversionRateList();
+            IEnumerable<ConversionRateModel> list = await conversionRateService.GetConversionRateListAsync();
 
             // Assert
-            Assert.Equal(initialConvertionRatesCount, list.Count());
+            Assert.Equal(expected, list.Count());
         }
 
         public static TheoryData<List<ConversionRate>> ConversionRateValues => new()

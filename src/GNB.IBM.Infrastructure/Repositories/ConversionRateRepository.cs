@@ -18,28 +18,28 @@ namespace GNB.IBM.Infrastructure.Repositories
             _settings = settings.Value;
         }
 
-        public async Task<IReadOnlyList<ConversionRate>> GetAllAsync()
+        public async Task<IEnumerable<ConversionRate>> GetConversionRateListAsync()
         {
             string conversionRatesURI = _settings.ConversionRatesURI;
-            List<ConversionRate>? objects = null;
+            List<ConversionRate>? conversionRates = null;
 
             try
             {
-                objects = await _httpHandler.GetAsync(conversionRatesURI);
+                conversionRates = await _httpHandler.GetAsync(conversionRatesURI);
             }
             catch (Exception)
             {
                 // Get data from database
-                objects = new List<ConversionRate>();
+                conversionRates = new List<ConversionRate>();
             }
             
-            if (objects is null)
+            if (conversionRates is null)
             {
                 // Get data from database
-                objects = new List<ConversionRate>();
+                conversionRates = new List<ConversionRate>();
             }
 
-            return objects;
+            return conversionRates;
         }
     }
 }

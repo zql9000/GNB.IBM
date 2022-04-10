@@ -21,7 +21,7 @@ namespace GNB.IBM.WebAPI.Controllers
         [HttpGet]
         public async Task<IEnumerable<ConversionRateDto>> Get()
         {
-            var list = await _conversionRateService.GetConversionRateList();
+            var list = await _conversionRateService.GetConversionRateListAsync();
             var mapped = _mapper.Map<IEnumerable<ConversionRateDto>>(list);
             return mapped;
         }
