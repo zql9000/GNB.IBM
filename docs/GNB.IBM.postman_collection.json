@@ -1,0 +1,89 @@
+{
+	"info": {
+		"_postman_id": "1716d29c-8da3-47d0-8c1c-96b2785707c4",
+		"name": "GNB.IBM",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "/conversion-rates",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/conversion-rates",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"conversion-rates"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/product-transactions",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/product-transactions",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"product-transactions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/product-transactions/products/{sku}",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/product-transactions/products/B6807",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"product-transactions",
+						"products",
+						"B6807"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "https://localhost:7003",
+			"type": "string"
+		}
+	]
+}
