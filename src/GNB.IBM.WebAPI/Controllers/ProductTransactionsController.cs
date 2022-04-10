@@ -28,10 +28,12 @@ namespace GNB.IBM.WebAPI.Controllers
 
         [Route("products/{sku}")]
         [HttpGet]
-        public async Task<IEnumerable<ProductTransactionDto>> Get(string sku)
+        public async Task<ProductTransactionWithTotalDto> Get(string sku)
         {
             var list = await _productTransactionService.GetProductTransactionListBySkuAsync(sku);
-            var mapped = _mapper.Map<IEnumerable<ProductTransactionDto>>(list);
+            var mapped = new ProductTransactionWithTotalDto();
+            mapped.ProductTransactions = _mapper.Map<IEnumerable<ProductTransactionDto>>(list);
+            mapped.Total = mapped.ProductTransactions.Sum(t => (decimal)t.Amount);
             return mapped;
         }
     }
