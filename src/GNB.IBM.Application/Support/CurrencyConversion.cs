@@ -1,12 +1,12 @@
-﻿using GNB.IBM.Application.Models;
+﻿using GNB.IBM.Core.Entities;
 
 namespace GNB.IBM.Application.Support
 {
     public class CurrencyConversion
     {
-        private readonly IEnumerable<ConversionRateModel> _conversions;
+        private readonly IEnumerable<ConversionRate> _conversions;
 
-        public CurrencyConversion(IEnumerable<ConversionRateModel> conversions)
+        public CurrencyConversion(IEnumerable<ConversionRate> conversions)
         {
             _conversions = conversions;
         }
@@ -32,8 +32,8 @@ namespace GNB.IBM.Application.Support
         private float FindConversion(string from, string to, float amount)
         {
             var visited = new HashSet<string>();
-            var navigation = new Stack<ConversionRateModel>();
-            var responsePath = new Stack<ConversionRateModel>();
+            var navigation = new Stack<ConversionRate>();
+            var responsePath = new Stack<ConversionRate>();
 
             visited.Add(from);
 
