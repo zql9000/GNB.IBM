@@ -41,5 +41,31 @@ namespace GNB.IBM.Infrastructure.Repositories
 
             return objects;
         }
+
+        public async Task<IEnumerable<ProductTransaction>> GetProductTransactionListBySkuAsync(string sku)
+        {
+            string productTransactionsURI = _settings.ProductTransactionsURI;
+            List<ProductTransaction>? objects = null;
+
+            try
+            {
+                objects = await _httpHandler.GetAsync(productTransactionsURI)
+                    ?? new List<ProductTransaction>();
+                objects = objects.Where(t => t.SKU == sku).ToList();
+            }
+            catch (Exception)
+            {
+                // Get data from database
+                objects = new List<ProductTransaction>();
+            }
+
+            if (objects is null)
+            {
+                // Get data from database
+                objects = new List<ProductTransaction>();
+            }
+
+            return objects;
+        }
     }
 }

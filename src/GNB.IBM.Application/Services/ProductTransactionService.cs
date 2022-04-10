@@ -22,5 +22,12 @@ namespace GNB.IBM.Application.Services
             var mapped = _mapper.Map<IEnumerable<ProductTransactionModel>>(productTransaction);
             return mapped;
         }
+
+        public async Task<IEnumerable<ProductTransactionModel>> GetProductTransactionListBySkuAsync(string sku)
+        {
+            var productTransaction = await _productTransactionRepository.GetProductTransactionListBySkuAsync(sku);
+            var mapped = _mapper.Map<IEnumerable<ProductTransactionModel>>(productTransaction);
+            return mapped;
+        }
     }
 }

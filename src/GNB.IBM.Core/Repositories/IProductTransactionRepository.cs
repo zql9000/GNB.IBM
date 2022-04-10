@@ -6,5 +6,6 @@ namespace GNB.IBM.Core.Repositories
     public interface IProductTransactionRepository : IRepository<ProductTransaction>
     {
         Task<IReadOnlyList<ProductTransaction>> GetAllAsync();
+        Task<IEnumerable<ProductTransaction>> GetProductTransactionListBySkuAsync(string sku);
     }
 }

@@ -25,5 +25,14 @@ namespace GNB.IBM.WebAPI.Controllers
             var mapped = _mapper.Map<IEnumerable<ProductTransactionDto>>(list);
             return mapped;
         }
+
+        [Route("products/{sku}")]
+        [HttpGet]
+        public async Task<IEnumerable<ProductTransactionDto>> Get(string sku)
+        {
+            var list = await _productTransactionService.GetProductTransactionListBySkuAsync(sku);
+            var mapped = _mapper.Map<IEnumerable<ProductTransactionDto>>(list);
+            return mapped;
+        }
     }
 }
