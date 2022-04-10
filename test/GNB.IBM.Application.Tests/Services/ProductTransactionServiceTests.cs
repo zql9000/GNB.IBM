@@ -27,7 +27,11 @@ namespace GNB.IBM.Application.Tests.Services
             });
             var mapper = mapperConfiguration.CreateMapper();
 
-            var productTransactionService = new ProductTransactionService(fakeIProductTransactionRepository.Object, mapper);
+            var fakeIConversionRateRepository = new Mock<IConversionRateRepository>();
+            var stubConversionRates = new List<ConversionRate>();
+            fakeIConversionRateRepository.Setup(x => x.GetConversionRateListAsync()).ReturnsAsync(stubConversionRates);
+
+            var productTransactionService = new ProductTransactionService(fakeIProductTransactionRepository.Object, mapper, fakeIConversionRateRepository.Object);
 
             // Act
             IEnumerable<ProductTransactionModel> list = await productTransactionService.GetProductTransactionListAsync();
@@ -52,7 +56,11 @@ namespace GNB.IBM.Application.Tests.Services
             });
             var mapper = mapperConfiguration.CreateMapper();
 
-            var productTransactionService = new ProductTransactionService(fakeIProductTransactionRepository.Object, mapper);
+            var fakeIConversionRateRepository = new Mock<IConversionRateRepository>();
+            var stubConversionRates = new List<ConversionRate>();
+            fakeIConversionRateRepository.Setup(x => x.GetConversionRateListAsync()).ReturnsAsync(stubConversionRates);
+
+            var productTransactionService = new ProductTransactionService(fakeIProductTransactionRepository.Object, mapper, fakeIConversionRateRepository.Object);
 
             // Act
             IEnumerable<ProductTransactionModel> list = await productTransactionService.GetProductTransactionListAsync();
