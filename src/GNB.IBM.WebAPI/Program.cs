@@ -4,9 +4,11 @@ using GNB.IBM.Core.Configuration;
 using GNB.IBM.Core.Interfaces;
 using GNB.IBM.Core.Repositories;
 using GNB.IBM.Core.Repositories.Base;
+using GNB.IBM.Infrastructure.Data;
 using GNB.IBM.Infrastructure.Repositories;
 using GNB.IBM.Infrastructure.Repositories.Base;
 using GNB.IBM.Infrastructure.Services;
+using Microsoft.EntityFrameworkCore;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -53,6 +55,7 @@ static void ConfigureCustomServices(IServiceCollection services, IConfiguration 
     services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
     services.AddScoped<IConversionRateRepository, ConversionRateRepository>();
     services.AddScoped<IProductTransactionRepository, ProductTransactionRepository>();
+    services.AddDbContext<DatabaseContext>(c => c.UseInMemoryDatabase("IBM"));
 
     // Add Application Layer
     services.AddScoped<IConversionRateService, ConversionRateService>();
