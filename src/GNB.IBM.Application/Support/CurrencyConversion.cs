@@ -72,7 +72,7 @@ namespace GNB.IBM.Application.Support
                 }
             }
 
-            throw new ApplicationException($"No existen conversiones para: {from} -> {to}.");
+            throw new Exceptions.ApplicationException($"No existen conversiones para: {from} -> {to}.");
         }
     }
 }
