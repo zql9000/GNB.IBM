@@ -1,7 +1,9 @@
 ﻿using GNB.IBM.Core.Configuration;
 using GNB.IBM.Core.Entities;
 using GNB.IBM.Core.Interfaces;
+using GNB.IBM.Infrastructure.Data;
 using GNB.IBM.Infrastructure.Repositories;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Moq;
 using System.Collections.Generic;
@@ -26,7 +28,15 @@ namespace GNB.IBM.Infrastructure.Tests.Repositories
             stubExternalServicesSettings.ProductTransactionsURI = productTransactionsURI;
             fakeIOptionsSnapshot.Setup(x => x.Value).Returns(stubExternalServicesSettings);
 
-            var productTransactionRepository = new ProductTransactionRepository(fakeIHttpHandler.Object, fakeIOptionsSnapshot.Object);
+            var options = new DbContextOptionsBuilder<DatabaseContext>()
+                .UseInMemoryDatabase("IBMTest")
+                .Options;
+            var fakeDatabaseContext = new DatabaseContext(options);
+
+            var productTransactionRepository = new ProductTransactionRepository(
+                fakeIHttpHandler.Object, 
+                fakeIOptionsSnapshot.Object,
+                fakeDatabaseContext);
 
             // Act
             IEnumerable<ProductTransaction> list = await productTransactionRepository.GetProductTransactionListAsync();
@@ -52,7 +62,15 @@ namespace GNB.IBM.Infrastructure.Tests.Repositories
             stubExternalServicesSettings.ProductTransactionsURI = productTransactionsURI;
             fakeIOptionsSnapshot.Setup(x => x.Value).Returns(stubExternalServicesSettings);
 
-            var productTransactionRepository = new ProductTransactionRepository(fakeIHttpHandler.Object, fakeIOptionsSnapshot.Object);
+            var options = new DbContextOptionsBuilder<DatabaseContext>()
+                .UseInMemoryDatabase("IBMTest")
+                .Options;
+            var fakeDatabaseContext = new DatabaseContext(options);
+
+            var productTransactionRepository = new ProductTransactionRepository(
+                fakeIHttpHandler.Object, 
+                fakeIOptionsSnapshot.Object,
+                fakeDatabaseContext);
 
             // Act
             IEnumerable<ProductTransaction> list = await productTransactionRepository.GetProductTransactionListAsync();
@@ -76,7 +94,15 @@ namespace GNB.IBM.Infrastructure.Tests.Repositories
             stubExternalServicesSettings.ProductTransactionsURI = productTransactionsURI;
             fakeIOptionsSnapshot.Setup(x => x.Value).Returns(stubExternalServicesSettings);
 
-            var productTransactionRepository = new ProductTransactionRepository(fakeIHttpHandler.Object, fakeIOptionsSnapshot.Object);
+            var options = new DbContextOptionsBuilder<DatabaseContext>()
+                .UseInMemoryDatabase("IBMTest")
+                .Options;
+            var fakeDatabaseContext = new DatabaseContext(options);
+
+            var productTransactionRepository = new ProductTransactionRepository(
+                fakeIHttpHandler.Object, 
+                fakeIOptionsSnapshot.Object, 
+                fakeDatabaseContext);
 
             // Act
             IEnumerable<ProductTransaction> list = await productTransactionRepository.GetProductTransactionListBySkuAsync(sku);
@@ -102,7 +128,15 @@ namespace GNB.IBM.Infrastructure.Tests.Repositories
             stubExternalServicesSettings.ProductTransactionsURI = productTransactionsURI;
             fakeIOptionsSnapshot.Setup(x => x.Value).Returns(stubExternalServicesSettings);
 
-            var productTransactionRepository = new ProductTransactionRepository(fakeIHttpHandler.Object, fakeIOptionsSnapshot.Object);
+            var options = new DbContextOptionsBuilder<DatabaseContext>()
+                .UseInMemoryDatabase("IBMTest")
+                .Options;
+            var fakeDatabaseContext = new DatabaseContext(options);
+
+            var productTransactionRepository = new ProductTransactionRepository(
+                fakeIHttpHandler.Object, 
+                fakeIOptionsSnapshot.Object,
+                fakeDatabaseContext);
 
             // Act
             IEnumerable<ProductTransaction> list = await productTransactionRepository.GetProductTransactionListBySkuAsync(sku);
