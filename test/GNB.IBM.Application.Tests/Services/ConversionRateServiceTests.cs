@@ -43,7 +43,7 @@ namespace GNB.IBM.Application.Tests.Services
         {
             // Arrange
             var fakeIConversionRateRepository = new Mock<IConversionRateRepository>();
-            var initialConvertionRatesCount = conversionRates.Count();
+            var expected = conversionRates.Count();
             fakeIConversionRateRepository.Setup(x => x.GetConversionRateListAsync()).ReturnsAsync(conversionRates);
 
             var mapperConfiguration = new MapperConfiguration(cfg =>
@@ -58,7 +58,7 @@ namespace GNB.IBM.Application.Tests.Services
             IEnumerable<ConversionRateModel> list = await conversionRateService.GetConversionRateListAsync();
 
             // Assert
-            Assert.Equal(initialConvertionRatesCount, list.Count());
+            Assert.Equal(expected, list.Count());
         }
 
         public static TheoryData<List<ConversionRate>> ConversionRateValues => new()

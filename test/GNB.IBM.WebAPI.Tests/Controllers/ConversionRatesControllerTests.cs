@@ -41,13 +41,13 @@ namespace GNB.IBM.WebAPI.Tests.Controllers
         {
             // Arrange
             var fakeIConversionRateService = new Mock<IConversionRateService>();
-            var conversionRates = new List<ConversionRateModel>
+            var stubConversionRates = new List<ConversionRateModel>
             {
                     new ConversionRateModel { From = "A", To = "B", Rate = 1.1f },
                     new ConversionRateModel { From = "B", To = "A", Rate = 1.2f }
             };
-            var initialConvertionRatesCount = conversionRates.Count();
-            fakeIConversionRateService.Setup(x => x.GetConversionRateListAsync()).ReturnsAsync(conversionRates);
+            var expected = stubConversionRates.Count();
+            fakeIConversionRateService.Setup(x => x.GetConversionRateListAsync()).ReturnsAsync(stubConversionRates);
 
             var mapperConfiguration = new MapperConfiguration(cfg =>
             {
@@ -61,7 +61,7 @@ namespace GNB.IBM.WebAPI.Tests.Controllers
             IEnumerable<ConversionRateDto> list = await conversionRatesController.Get();
 
             // Assert
-            Assert.Equal(initialConvertionRatesCount, list.Count());
+            Assert.Equal(expected, list.Count());
         }
 
         [Fact]
@@ -69,9 +69,9 @@ namespace GNB.IBM.WebAPI.Tests.Controllers
         {
             // Arrange
             var fakeIConversionRateService = new Mock<IConversionRateService>();
-            var conversionRates = new List<ConversionRateModel>();
-            var initialConvertionRatesCount = conversionRates.Count();
-            fakeIConversionRateService.Setup(x => x.GetConversionRateListAsync()).ReturnsAsync(conversionRates);
+            var stubConversionRates = new List<ConversionRateModel>();
+            var expected = stubConversionRates.Count();
+            fakeIConversionRateService.Setup(x => x.GetConversionRateListAsync()).ReturnsAsync(stubConversionRates);
 
             var mapperConfiguration = new MapperConfiguration(cfg =>
             {
@@ -85,7 +85,7 @@ namespace GNB.IBM.WebAPI.Tests.Controllers
             IEnumerable<ConversionRateDto> list = await conversionRatesController.Get();
 
             // Assert
-            Assert.Equal(initialConvertionRatesCount, list.Count());
+            Assert.Equal(expected, list.Count());
         }
     }
 }

@@ -43,7 +43,7 @@ namespace GNB.IBM.Infrastructure.Tests.Repositories
             // Arrange
             var fakeIHttpHandler = new Mock<IHttpHandler<ConversionRate>>();
             var stubConversionRates = conversionRates;
-            var initialConvertionRatesCount = conversionRates.Count();
+            var expected = conversionRates.Count();
             fakeIHttpHandler.Setup(x => x.GetAsync(It.IsAny<string>())).ReturnsAsync(stubConversionRates);
 
             var fakeIOptionsSnapshot = new Mock<IOptionsSnapshot<ExternalServicesSettings>>();
@@ -58,7 +58,7 @@ namespace GNB.IBM.Infrastructure.Tests.Repositories
             IEnumerable<ConversionRate> list = await conversionRateRepository.GetConversionRateListAsync();
 
             // Assert
-            Assert.Equal(initialConvertionRatesCount, list.Count());
+            Assert.Equal(expected, list.Count());
         }
 
         public static TheoryData<List<ConversionRate>> ConversionRateValues => new()

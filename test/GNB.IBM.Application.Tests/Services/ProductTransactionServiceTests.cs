@@ -47,7 +47,7 @@ namespace GNB.IBM.Application.Tests.Services
         {
             // Arrange
             var fakeIProductTransactionRepository = new Mock<IProductTransactionRepository>();
-            var initialConvertionRatesCount = productTransactions.Count();
+            var expected = productTransactions.Count();
             fakeIProductTransactionRepository.Setup(x => x.GetProductTransactionListAsync()).ReturnsAsync(productTransactions);
 
             var mapperConfiguration = new MapperConfiguration(cfg =>
@@ -66,7 +66,7 @@ namespace GNB.IBM.Application.Tests.Services
             IEnumerable<ProductTransactionModel> list = await productTransactionService.GetProductTransactionListAsync();
 
             // Assert
-            Assert.Equal(initialConvertionRatesCount, list.Count());
+            Assert.Equal(expected, list.Count());
         }
 
         public static TheoryData<List<ProductTransaction>> ProductTransactionValues => new()
