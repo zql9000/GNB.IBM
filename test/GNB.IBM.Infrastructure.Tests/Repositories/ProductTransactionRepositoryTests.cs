@@ -29,7 +29,7 @@ namespace GNB.IBM.Infrastructure.Tests.Repositories
                 var productTransactionRepository = new ProductTransactionRepository(fakeIHttpHandler.Object, fakeIOptionsSnapshot.Object);
 
                 // Act
-                IReadOnlyList<ProductTransaction> list = await productTransactionRepository.GetAllAsync();
+                IEnumerable<ProductTransaction> list = await productTransactionRepository.GetProductTransactionListAsync();
 
                 // Assert
                 fakeIHttpHandler.Verify(x => x.GetAsync(productTransactionsURI), Times.Once);
@@ -55,7 +55,7 @@ namespace GNB.IBM.Infrastructure.Tests.Repositories
                 var productTransactionRepository = new ProductTransactionRepository(fakeIHttpHandler.Object, fakeIOptionsSnapshot.Object);
 
                 // Act
-                IReadOnlyList<ProductTransaction> list = await productTransactionRepository.GetAllAsync();
+                IEnumerable<ProductTransaction> list = await productTransactionRepository.GetProductTransactionListAsync();
 
                 // Assert
                 Assert.Equal(initialConvertionRatesCount, list.Count());

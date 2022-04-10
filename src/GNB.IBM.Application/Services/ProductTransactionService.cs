@@ -16,9 +16,9 @@ namespace GNB.IBM.Application.Services
             _mapper = mapper;
         }
 
-        public async Task<IEnumerable<ProductTransactionModel>> GetProductTransactionList()
+        public async Task<IEnumerable<ProductTransactionModel>> GetProductTransactionListAsync()
         {
-            var productTransaction = await _productTransactionRepository.GetAllAsync();
+            var productTransaction = await _productTransactionRepository.GetProductTransactionListAsync();
             var mapped = _mapper.Map<IEnumerable<ProductTransactionModel>>(productTransaction);
             return mapped;
         }

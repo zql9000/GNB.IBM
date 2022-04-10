@@ -18,54 +18,54 @@ namespace GNB.IBM.Infrastructure.Repositories
             _settings = settings.Value;
         }
 
-        public async Task<IReadOnlyList<ProductTransaction>> GetAllAsync()
+        public async Task<IEnumerable<ProductTransaction>> GetProductTransactionListAsync()
         {
             string productTransactionsURI = _settings.ProductTransactionsURI;
-            List<ProductTransaction>? objects = null;
+            List<ProductTransaction>? productTransactions = null;
 
             try
             {
-                objects = await _httpHandler.GetAsync(productTransactionsURI);
+                productTransactions = await _httpHandler.GetAsync(productTransactionsURI);
             }
             catch (Exception)
             {
                 // Get data from database
-                objects = new List<ProductTransaction>();
+                productTransactions = new List<ProductTransaction>();
             }
 
-            if (objects is null)
+            if (productTransactions is null)
             {
                 // Get data from database
-                objects = new List<ProductTransaction>();
+                productTransactions = new List<ProductTransaction>();
             }
 
-            return objects;
+            return productTransactions;
         }
 
         public async Task<IEnumerable<ProductTransaction>> GetProductTransactionListBySkuAsync(string sku)
         {
             string productTransactionsURI = _settings.ProductTransactionsURI;
-            List<ProductTransaction>? objects = null;
+            List<ProductTransaction>? productTransactions = null;
 
             try
             {
-                objects = await _httpHandler.GetAsync(productTransactionsURI)
+                productTransactions = await _httpHandler.GetAsync(productTransactionsURI)
                     ?? new List<ProductTransaction>();
-                objects = objects.Where(t => t.SKU == sku).ToList();
+                productTransactions = productTransactions.Where(t => t.SKU == sku).ToList();
             }
             catch (Exception)
             {
                 // Get data from database
-                objects = new List<ProductTransaction>();
+                productTransactions = new List<ProductTransaction>();
             }
 
-            if (objects is null)
+            if (productTransactions is null)
             {
                 // Get data from database
-                objects = new List<ProductTransaction>();
+                productTransactions = new List<ProductTransaction>();
             }
 
-            return objects;
+            return productTransactions;
         }
     }
 }

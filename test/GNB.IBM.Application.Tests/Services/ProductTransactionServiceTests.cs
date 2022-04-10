@@ -19,7 +19,7 @@ namespace GNB.IBM.Application.Tests.Services
             // Arrange
             var fakeIProductTransactionRepository = new Mock<IProductTransactionRepository>();
             var stubProductTransactions = new List<ProductTransaction>();
-            fakeIProductTransactionRepository.Setup(x => x.GetAllAsync()).ReturnsAsync(stubProductTransactions);
+            fakeIProductTransactionRepository.Setup(x => x.GetProductTransactionListAsync()).ReturnsAsync(stubProductTransactions);
 
             var mapperConfiguration = new MapperConfiguration(cfg =>
             {
@@ -30,10 +30,10 @@ namespace GNB.IBM.Application.Tests.Services
             var productTransactionService = new ProductTransactionService(fakeIProductTransactionRepository.Object, mapper);
 
             // Act
-            IEnumerable<ProductTransactionModel> list = await productTransactionService.GetProductTransactionList();
+            IEnumerable<ProductTransactionModel> list = await productTransactionService.GetProductTransactionListAsync();
 
             // Assert
-            fakeIProductTransactionRepository.Verify(x => x.GetAllAsync(), Times.Once);
+            fakeIProductTransactionRepository.Verify(x => x.GetProductTransactionListAsync(), Times.Once);
         }
 
         [Theory]
@@ -44,7 +44,7 @@ namespace GNB.IBM.Application.Tests.Services
             // Arrange
             var fakeIProductTransactionRepository = new Mock<IProductTransactionRepository>();
             var initialConvertionRatesCount = productTransactions.Count();
-            fakeIProductTransactionRepository.Setup(x => x.GetAllAsync()).ReturnsAsync(productTransactions);
+            fakeIProductTransactionRepository.Setup(x => x.GetProductTransactionListAsync()).ReturnsAsync(productTransactions);
 
             var mapperConfiguration = new MapperConfiguration(cfg =>
             {
@@ -55,7 +55,7 @@ namespace GNB.IBM.Application.Tests.Services
             var productTransactionService = new ProductTransactionService(fakeIProductTransactionRepository.Object, mapper);
 
             // Act
-            IEnumerable<ProductTransactionModel> list = await productTransactionService.GetProductTransactionList();
+            IEnumerable<ProductTransactionModel> list = await productTransactionService.GetProductTransactionListAsync();
 
             // Assert
             Assert.Equal(initialConvertionRatesCount, list.Count());

@@ -21,7 +21,7 @@ namespace GNB.IBM.WebAPI.Controllers
         [HttpGet]
         public async Task<IEnumerable<ProductTransactionDto>> Get()
         {
-            var list = await _productTransactionService.GetProductTransactionList();
+            var list = await _productTransactionService.GetProductTransactionListAsync();
             var mapped = _mapper.Map<IEnumerable<ProductTransactionDto>>(list);
             return mapped;
         }

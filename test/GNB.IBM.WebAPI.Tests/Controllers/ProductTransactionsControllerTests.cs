@@ -19,7 +19,7 @@ namespace GNB.IBM.WebAPI.Tests.Controllers
                 // Arrange
                 var fakeIProductTransactionService = new Mock<IProductTransactionService>();
                 var stubProductTransactions = new List<ProductTransactionModel>();
-                fakeIProductTransactionService.Setup(x => x.GetProductTransactionList()).ReturnsAsync(stubProductTransactions);
+                fakeIProductTransactionService.Setup(x => x.GetProductTransactionListAsync()).ReturnsAsync(stubProductTransactions);
 
                 var mapperConfiguration = new MapperConfiguration(cfg =>
                 {
@@ -33,7 +33,7 @@ namespace GNB.IBM.WebAPI.Tests.Controllers
                 IEnumerable<ProductTransactionDto> list = await productTransactionsController.Get();
 
                 // Assert
-                fakeIProductTransactionService.Verify(x => x.GetProductTransactionList(), Times.Once);
+                fakeIProductTransactionService.Verify(x => x.GetProductTransactionListAsync(), Times.Once);
             }
 
             [Fact]
@@ -47,7 +47,7 @@ namespace GNB.IBM.WebAPI.Tests.Controllers
                     new ProductTransactionModel { SKU = "B", Amount = 1.2f, Currency = "B" }
             };
                 var initialConvertionRatesCount = productTransactions.Count();
-                fakeIProductTransactionService.Setup(x => x.GetProductTransactionList()).ReturnsAsync(productTransactions);
+                fakeIProductTransactionService.Setup(x => x.GetProductTransactionListAsync()).ReturnsAsync(productTransactions);
 
                 var mapperConfiguration = new MapperConfiguration(cfg =>
                 {
@@ -71,7 +71,7 @@ namespace GNB.IBM.WebAPI.Tests.Controllers
                 var fakeIProductTransactionService = new Mock<IProductTransactionService>();
                 var productTransactions = new List<ProductTransactionModel>();
                 var initialConvertionRatesCount = productTransactions.Count();
-                fakeIProductTransactionService.Setup(x => x.GetProductTransactionList()).ReturnsAsync(productTransactions);
+                fakeIProductTransactionService.Setup(x => x.GetProductTransactionListAsync()).ReturnsAsync(productTransactions);
 
                 var mapperConfiguration = new MapperConfiguration(cfg =>
                 {
