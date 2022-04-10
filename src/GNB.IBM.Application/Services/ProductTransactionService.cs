@@ -40,8 +40,15 @@ namespace GNB.IBM.Application.Services
             
             productTransactions = productTransactions.Select(productTransaction =>
             {
-                productTransaction.Amount = currencyConversion.Convert(productTransaction.Currency, _euroCurrency, productTransaction.Amount);
-                productTransaction.Currency = _euroCurrency;
+                try
+                {
+                    productTransaction.Amount = currencyConversion.Convert(productTransaction.Currency, _euroCurrency, productTransaction.Amount);
+                    productTransaction.Currency = _euroCurrency;
+                }
+                catch (Exception ex)
+                {
+                    productTransaction.Currency = ex.Message;
+                }
                 return productTransaction;
             });
             
