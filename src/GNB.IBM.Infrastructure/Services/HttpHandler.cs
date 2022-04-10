@@ -23,7 +23,6 @@ namespace GNB.IBM.Infrastructure.Services
             List<T>? responseList = JsonConvert.DeserializeObject<List<T>>(json);
             
             return responseList;
-
         }
     }
 }
