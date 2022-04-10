@@ -29,7 +29,7 @@ namespace GNB.IBM.Infrastructure.Tests.Repositories
             var conversionRateRepository = new ConversionRateRepository(fakeIHttpHandler.Object, fakeIOptionsSnapshot.Object);
 
             // Act
-            IReadOnlyList<ConversionRate> list = await conversionRateRepository.GetAllAsync();
+            IEnumerable<ConversionRate> list = await conversionRateRepository.GetConversionRateListAsync();
 
             // Assert
             fakeIHttpHandler.Verify(x => x.GetAsync(conversionRatesURI), Times.Once);
@@ -55,7 +55,7 @@ namespace GNB.IBM.Infrastructure.Tests.Repositories
             var conversionRateRepository = new ConversionRateRepository(fakeIHttpHandler.Object, fakeIOptionsSnapshot.Object);
 
             // Act
-            IReadOnlyList<ConversionRate> list = await conversionRateRepository.GetAllAsync();
+            IEnumerable<ConversionRate> list = await conversionRateRepository.GetConversionRateListAsync();
 
             // Assert
             Assert.Equal(initialConvertionRatesCount, list.Count());

@@ -19,7 +19,7 @@ namespace GNB.IBM.WebAPI.Tests.Controllers
             // Arrange
             var fakeIConversionRateService = new Mock<IConversionRateService>();
             var stubConversionRates = new List<ConversionRateModel>();
-            fakeIConversionRateService.Setup(x => x.GetConversionRateList()).ReturnsAsync(stubConversionRates);
+            fakeIConversionRateService.Setup(x => x.GetConversionRateListAsync()).ReturnsAsync(stubConversionRates);
 
             var mapperConfiguration = new MapperConfiguration(cfg =>
             {
@@ -33,7 +33,7 @@ namespace GNB.IBM.WebAPI.Tests.Controllers
             IEnumerable<ConversionRateDto> list = await conversionRatesController.Get();
 
             // Assert
-            fakeIConversionRateService.Verify(x => x.GetConversionRateList(), Times.Once);
+            fakeIConversionRateService.Verify(x => x.GetConversionRateListAsync(), Times.Once);
         }
 
         [Fact]
@@ -47,7 +47,7 @@ namespace GNB.IBM.WebAPI.Tests.Controllers
                     new ConversionRateModel { From = "B", To = "A", Rate = 1.2f }
             };
             var initialConvertionRatesCount = conversionRates.Count();
-            fakeIConversionRateService.Setup(x => x.GetConversionRateList()).ReturnsAsync(conversionRates);
+            fakeIConversionRateService.Setup(x => x.GetConversionRateListAsync()).ReturnsAsync(conversionRates);
 
             var mapperConfiguration = new MapperConfiguration(cfg =>
             {
@@ -71,7 +71,7 @@ namespace GNB.IBM.WebAPI.Tests.Controllers
             var fakeIConversionRateService = new Mock<IConversionRateService>();
             var conversionRates = new List<ConversionRateModel>();
             var initialConvertionRatesCount = conversionRates.Count();
-            fakeIConversionRateService.Setup(x => x.GetConversionRateList()).ReturnsAsync(conversionRates);
+            fakeIConversionRateService.Setup(x => x.GetConversionRateListAsync()).ReturnsAsync(conversionRates);
 
             var mapperConfiguration = new MapperConfiguration(cfg =>
             {

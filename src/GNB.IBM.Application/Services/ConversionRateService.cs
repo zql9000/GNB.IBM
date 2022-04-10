@@ -10,16 +10,16 @@ namespace GNB.IBM.Application.Services
         private readonly IConversionRateRepository _conversionRateRepository;
         private readonly IMapper _mapper;
 
-        public ConversionRateService(IConversionRateRepository ConversionRateRepository, IMapper mapper)
+        public ConversionRateService(IConversionRateRepository conversionRateRepository, IMapper mapper)
         {
-            _conversionRateRepository = ConversionRateRepository;
+            _conversionRateRepository = conversionRateRepository;
             _mapper = mapper;
         }
 
-        public async Task<IEnumerable<ConversionRateModel>> GetConversionRateList()
+        public async Task<IEnumerable<ConversionRateModel>> GetConversionRateListAsync()
         {
-            var conversionRate = await _conversionRateRepository.GetAllAsync();
-            var mapped = _mapper.Map<IEnumerable<ConversionRateModel>>(conversionRate);
+            var conversionRates = await _conversionRateRepository.GetConversionRateListAsync();
+            var mapped = _mapper.Map<IEnumerable<ConversionRateModel>>(conversionRates);
             return mapped;
         }
     }
