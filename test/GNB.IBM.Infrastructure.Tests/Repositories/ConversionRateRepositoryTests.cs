@@ -1,7 +1,9 @@
 using GNB.IBM.Core.Configuration;
 using GNB.IBM.Core.Entities;
 using GNB.IBM.Core.Interfaces;
+using GNB.IBM.Infrastructure.Data;
 using GNB.IBM.Infrastructure.Repositories;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Moq;
 using System.Collections.Generic;
@@ -26,7 +28,15 @@ namespace GNB.IBM.Infrastructure.Tests.Repositories
             stubExternalServicesSettings.ConversionRatesURI = conversionRatesURI;
             fakeIOptionsSnapshot.Setup(x => x.Value).Returns(stubExternalServicesSettings);
 
-            var conversionRateRepository = new ConversionRateRepository(fakeIHttpHandler.Object, fakeIOptionsSnapshot.Object);
+            var options = new DbContextOptionsBuilder<DatabaseContext>()
+                .UseInMemoryDatabase("IBMTest")
+                .Options;
+            var fakeDatabaseContext = new DatabaseContext(options);
+
+            var conversionRateRepository = new ConversionRateRepository(
+                fakeIHttpHandler.Object, 
+                fakeIOptionsSnapshot.Object, 
+                fakeDatabaseContext);
 
             // Act
             IEnumerable<ConversionRate> list = await conversionRateRepository.GetConversionRateListAsync();
@@ -52,7 +62,15 @@ namespace GNB.IBM.Infrastructure.Tests.Repositories
             stubExternalServicesSettings.ConversionRatesURI = conversionRatesURI;
             fakeIOptionsSnapshot.Setup(x => x.Value).Returns(stubExternalServicesSettings);
 
-            var conversionRateRepository = new ConversionRateRepository(fakeIHttpHandler.Object, fakeIOptionsSnapshot.Object);
+            var options = new DbContextOptionsBuilder<DatabaseContext>()
+                .UseInMemoryDatabase("IBMTest")
+                .Options;
+            var fakeDatabaseContext = new DatabaseContext(options);
+
+            var conversionRateRepository = new ConversionRateRepository(
+                fakeIHttpHandler.Object, 
+                fakeIOptionsSnapshot.Object,
+                fakeDatabaseContext);
 
             // Act
             IEnumerable<ConversionRate> list = await conversionRateRepository.GetConversionRateListAsync();
